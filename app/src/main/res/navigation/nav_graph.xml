@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="uz.revolution.mydictionary.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_wordFragment"
+            app:destination="@id/wordFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryItemFragment"
+            app:destination="@id/categoryItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryItemFragment"
+        android:name="uz.revolution.mydictionary.home.CategoryItemFragment"
+        android:label="fragment_category_item"
+        tools:layout="@layout/fragment_category_item" >
+        <action
+            android:id="@+id/action_categoryItemFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_categoryItemFragment_to_tanlanganFragment"
+            app:destination="@id/tanlanganFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wordFragment"
+        android:name="uz.revolution.mydictionary.word.WordFragment"
+        android:label="fragment_word"
+        tools:layout="@layout/fragment_word" />
+    <fragment
+        android:id="@+id/tanlanganFragment"
+        android:name="uz.revolution.mydictionary.home.TanlanganFragment"
+        android:label="fragment_tanlangan"
+        tools:layout="@layout/fragment_tanlangan" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="uz.revolution.mydictionary.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_addWord"
+            app:destination="@id/addWord" />
+    </fragment>
+    <fragment
+        android:id="@+id/addWord"
+        android:name="uz.revolution.mydictionary.word.AddWord"
+        android:label="fragment_add_word"
+        tools:layout="@layout/fragment_add_word" />
+</navigation>
