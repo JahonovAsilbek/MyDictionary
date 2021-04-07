@@ -42,6 +42,8 @@ class HomeFragment : Fragment() {
     private var adapter: CategoryAdapter? = null
     private var likedWordList: ArrayList<Word>? = null
 
+    private var bottomBarPosition = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,7 +61,11 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        loadAllData()
+        when (bottomBarPosition) {
+            0 -> loadAllData()
+            1 -> loadLikedData()
+        }
+        binding.bottomNavigation.selectTabAt(bottomBarPosition, true)
     }
 
     private fun loadAllData() {
@@ -71,6 +77,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadLikedData() {
+        bottomBarPosition = 1
         binding.viewPager.visibility = View.GONE
         binding.tabLayout.visibility = View.GONE
         binding.likedRv.visibility = View.VISIBLE
@@ -93,6 +100,7 @@ class HomeFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putSerializable("word", word)
                 findNavController().navigate(R.id.wordFragment, bundle)
+                bottomBarPosition = binding.bottomNavigation.selectedIndex
             }
         }
     }
@@ -139,7 +147,7 @@ class HomeFragment : Fragment() {
 
     private fun setTabs() {
         binding.tabLayout.setViewPager(binding.viewPager, getTabLayoutTitles())
-        binding.tabLayout.setCurrentTab(binding.tabLayout.currentTab)
+        binding.tabLayout.currentTab = binding.tabLayout.currentTab
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -231,9 +239,6 @@ class HomeFragment : Fragment() {
         for (i in 0 until data!!.size) {
             array[i] = data!![i].category.categoryName.toString()
         }
-//        for (i in 0 until 7) {
-//            array[i] = "tab $i"
-//        }
         return array
     }
 }
