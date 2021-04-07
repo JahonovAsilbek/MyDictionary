@@ -57,6 +57,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadAllData()
+    }
+
     private fun loadAllData() {
         binding.likedRv.visibility = View.GONE
         binding.tabLayout.visibility = View.VISIBLE
