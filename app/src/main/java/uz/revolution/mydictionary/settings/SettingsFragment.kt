@@ -250,6 +250,12 @@ class SettingsFragment : Fragment() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe()
+            // deleting all words belong category
+            AppDatabase.get.getDatabase().getDao()
+                .deleteAllWordByCategoryID(category.id!!)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
             alertDialog.cancel()
             Snackbar.make(
                 binding.root,

@@ -34,6 +34,9 @@ interface DictionaryDao {
     @Delete
     fun deleteWord(word: Word): Single<Int>
 
+    @Query("delete from word where categoryID=:categoryID")
+    fun deleteAllWordByCategoryID(categoryID: Int):Single<Int>
+
     // methods for category
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
