@@ -25,7 +25,7 @@ import uz.revolution.mydictionary.databinding.FragmentSettingsBinding
 import uz.revolution.mydictionary.settings.adapters.SettingsCategoryAdapter
 import uz.revolution.mydictionary.settings.adapters.SettingsWordAdapter
 
-private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM1 = "string"
 private const val ARG_PARAM2 = "param2"
 
 class SettingsFragment : Fragment() {
@@ -58,6 +58,14 @@ class SettingsFragment : Fragment() {
         loadCategoryData()
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (param1 == null) {
+            loadWordData()
+            binding.bottomNavigation.selectTabAt(1, true)
+        }
     }
 
     private fun bottomNavigationClick() {
@@ -199,6 +207,7 @@ class SettingsFragment : Fragment() {
 
             } else {
                 findNavController().navigate(R.id.addWord)
+                param1 = null
             }
             true
         }

@@ -123,7 +123,9 @@ class HomeFragment : Fragment() {
     private fun editClick() {
         binding.toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.home_edit) {
-                findNavController().navigate(R.id.settingsFragment)
+                val bundle = Bundle()
+                bundle.putString("string", "bir narsa")
+                findNavController().navigate(R.id.settingsFragment, bundle)
             }
             true
         }
@@ -137,6 +139,7 @@ class HomeFragment : Fragment() {
 
     private fun setTabs() {
         binding.tabLayout.setViewPager(binding.viewPager, getTabLayoutTitles())
+        binding.tabLayout.setCurrentTab(binding.tabLayout.currentTab)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
