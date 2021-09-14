@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/RoundedCornersDialog"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dialog_back"
-    style="@style/RoundedCornersDialog"
     app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,12 +14,12 @@
         android:padding="15dp">
 
         <TextView
-            android:layout_marginTop="10dp"
             android:id="@+id/title"
             style="@style/lap_top"
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:text="Bu kategoriyani o'chirasizmi?"
             android:textColor="#000000"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -35,6 +35,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/buttons_back"
             android:backgroundTint="#FCB600"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:text="Ha"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
@@ -53,6 +54,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/buttons_back"
             android:backgroundTint="#20D472"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:text="Yo'q"
             android:textAllCaps="false"
             android:textColor="@android:color/white"

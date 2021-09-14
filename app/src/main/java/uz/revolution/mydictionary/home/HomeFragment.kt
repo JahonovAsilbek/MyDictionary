@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import uz.revolution.mydictionary.R
@@ -41,8 +42,8 @@ class HomeFragment : Fragment() {
     private var data: ArrayList<CategoryData>? = null
     private var adapter: CategoryAdapter? = null
     private var likedWordList: ArrayList<Word>? = null
-
     private var bottomBarPosition = 0
+    private var viewPagerPosition = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +63,10 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         when (bottomBarPosition) {
-            0 -> loadAllData()
+            0 -> {
+                loadAllData()
+                binding.viewPager.currentItem = viewPagerPosition
+            }
             1 -> loadLikedData()
         }
         binding.bottomNavigation.selectTabAt(bottomBarPosition, true)
@@ -110,9 +114,11 @@ class HomeFragment : Fragment() {
             when (it.id) {
                 R.id.main -> {
                     loadAllData()
+                    bottomBarPosition = 0
                 }
                 R.id.liked -> {
                     loadLikedData()
+                    bottomBarPosition = 1
                 }
             }
         }
@@ -120,9 +126,11 @@ class HomeFragment : Fragment() {
             when (it.id) {
                 R.id.main -> {
                     loadAllData()
+                    bottomBarPosition = 0
                 }
                 R.id.liked -> {
                     loadLikedData()
+                    bottomBarPosition = 1
                 }
             }
         }
@@ -143,6 +151,25 @@ class HomeFragment : Fragment() {
         adapter = data?.let { CategoryAdapter(it, childFragmentManager) }
         binding.viewPager.adapter = adapter
         setTabs()
+
+        binding.viewPager.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                viewPagerPosition = position
+            }
+
+            override fun onPageSelected(position: Int) {
+
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+        })
     }
 
     private fun setTabs() {
@@ -204,34 +231,6 @@ class HomeFragment : Fragment() {
 
         Log.d(TAG, "loadData: ${data?.size}")
 
-//        for (i in 0 until 10) {
-//            data?.add(
-//                CategoryData(
-//                    Category(i, "Texnika"),
-//                    arrayListOf(
-//                        Word(i, "Laptop1", "noutbuk", null, true),
-//                        Word(i, "Laptop", "noutbuk", null, false),
-//                        Word(i, "Laptop1", "noutbuk", null, true),
-//                        Word(i, "Laptop", "noutbuk", null, false),
-//                        Word(i, "Laptop1", "noutbuk", null, true),
-//                        Word(i, "Laptop", "noutbuk", null, false),
-//                        Word(i, "Lapto1", "noutbuk", null, true),
-//                        Word(i, "Laptop", "noutbuk", null, false),
-//                        Word(i, "Laptop", "noutbuk", null, false),
-//                        Word(i, "Laptop1", "noutbuk", null, true),
-//                        Word(i, "Laptop", "noutbuk", null, false),
-//                        Word(i, "Laptop1", "noutbuk", null, true)
-//                    )
-//                )
-//            )
-//            data?.add(
-//                CategoryData(
-//                    Category(i,"sport"),
-//                    arrayListOf
-//                        ()
-//                )
-//            )
-//        }
     }
 
     private fun getTabLayoutTitles(): Array<String?> {
